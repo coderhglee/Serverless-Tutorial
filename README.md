@@ -20,7 +20,7 @@
    - 로컬 스토리지가 사용 불가능하다. (S3나 ssm parameter store 이용)
    - 국내 자료가 많이 없다.
 
-## [Install]
+## 1. [Install]
 [Install]: https://www.serverless.com/framework/docs/providers/aws/guide/installation/
 
 ```
@@ -31,14 +31,14 @@ serverless
 serverless --version
 ```
 
-## [Create]
+## 2. [Create]
 [Create]: https://www.serverless.com/framework/docs/providers/aws/cli-reference/create/
 초기 프로젝트 생성
 ```
 serverless create --template <template_name> --path <directory_path> --name <service_name>
 ```
 
-## [Invoke]
+## 3. [Invoke]
 [Invoke]: https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke/
 1. 로컬에 정의된 함수 호출
 ```
@@ -52,29 +52,22 @@ serverless invoke --stage <stage_name> --function <function_name>
 ## 실제 호출 람다 주소
 arn:aws:lambda:{region}:{account}:function:{service_name}-{stage}-{function_name}
 ```
-## [Deploy]
+## 4. [Deploy]
 [Deploy]: https://www.serverless.com/framework/docs/providers/aws/cli-reference/deploy/
 
 ```
 SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_name <<ARC ORG>> --verbose
 ```
 
-## [AWS Events]
+## 5. [AWS Events]
 [AWS Events]: serverless.com/framework/docs/providers/aws/events/
 
 ### 1. [API GATEWAY]
 [API GATEWAY]: https://www.serverless.com/framework/docs/providers/aws/events/apigateway/
-#### [HTTP API vs REST API]
+#### - [HTTP API vs REST API]
 [HTTP API vs REST API]: https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/http-api-vs-rest.html
-#### [Custom Domains]
+#### - [Custom Domains]
 [Custom Domains]: https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-custom-domains.html
-
-* sls offline
-```
-npm install serverless-offline 
-
-sls offline
-```
 
 ### 2. Schedule
 
@@ -82,5 +75,32 @@ sls offline
 
 ### 4. S3
 
-### [Plugins]
+## 6. [Plugins]
 [Plugins]: https://www.serverless.com/framework/docs/providers/aws/guide/plugins/
+
+### [serverless-webpack]
+[serverless-webpack]: https://github.com/serverless-heaven/serverless-webpack
+- ES6 문법 변환
+
+### [serverless-dotenv-plugin]
+[serverless-dotenv-plugin]: https://github.com/colynb/serverless-dotenv-plugin
+- `.env` 파일을 serverless yaml 구성에 로드 시키는 플러그인
+
+#### serverless-offline
+[serverless-offline]: https://github.com/dherault/serverless-offline
+- 람다 함수 로컬 실행 플러그인
+```
+npm install serverless-offline 
+
+sls offline
+```
+
+### serverless-offline-sqs
+[serverless-offline-sqs]: https://github.com/CoorpAcademy/serverless-plugins/tree/master/packages/serverless-offline-sqs
+- ElasticMQ를 이용한 로컬 SQS 테스트
+- Docker 활용
+
+### serverless-python-requirements
+[serverless-python-requirements]: https://github.com/UnitedIncome/serverless-python-requirements
+- Python `requirements.txt` 외부 라이브러리 패키징 플러그인
+- Docker 활용
