@@ -1,0 +1,57 @@
+service:
+  name: my-first-api
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: hglee
+  region: ap-northeast-2
+  environment:
+    ORG: ${self:custom.derived.orgName}
+
+functions:
+  first:
+    handler: src/first.hello
+  second:
+    handler: src/second.hello
+    events:
+      - http:
+          method: get
+          path: get/create/{title}
+          request:
+            parameters:
+              # querystrings:
+                # url: true
+              # headers:
+                # foo: true
+              paths:
+                title: false
+      - http:
+          method: post
+          path: movie/create
+          request:
+            schema:
+              application/json: ${file(./models/movie.json)}
+
+custom:
+  env:
+    local:
+      orgName: local.chosun
+    sandbox:
+      orgName: sandbox.chosun
+    prod:
+      orgName: chosun
+  defaults:
+    orgName: sandbox.chosun
+    stage: local
+  derived:
+    stage: ${opt:stage, env:STAGE, self:custom.defaults.stage}
+    orgName: ${opt:org_name, env:ORG_NAME, self:custom.env.${self:custom.derived.stage}.orgName, self:custom.defaults.orgName}

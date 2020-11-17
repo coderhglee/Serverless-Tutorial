@@ -1,0 +1,10 @@
+curl --location --request POST 'http://localhost:3000/dev/movie/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "categories": [
+        "cat1",
+        "cat2"
+    ],
+    "description": "Test Movie Description",
+    "title": "Test Movie Title"
+}'
