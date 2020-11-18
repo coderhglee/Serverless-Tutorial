@@ -86,7 +86,7 @@ SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_
 [serverless-dotenv-plugin]: https://github.com/colynb/serverless-dotenv-plugin
 - `.env` 파일을 serverless yaml 구성에 로드 시키는 플러그인
 
-#### serverless-offline
+### [serverless-offline]
 [serverless-offline]: https://github.com/dherault/serverless-offline
 - 람다 함수 로컬 실행 플러그인
 ```
@@ -95,12 +95,12 @@ npm install serverless-offline
 sls offline
 ```
 
-### serverless-offline-sqs
+### [serverless-offline-sqs]
 [serverless-offline-sqs]: https://github.com/CoorpAcademy/serverless-plugins/tree/master/packages/serverless-offline-sqs
 - ElasticMQ를 이용한 로컬 SQS 테스트
 - Docker 활용
 
-### serverless-python-requirements
+### [serverless-python-requirements]
 [serverless-python-requirements]: https://github.com/UnitedIncome/serverless-python-requirements
 - Python `requirements.txt` 외부 라이브러리 패키징 플러그인
 - Docker 활용
