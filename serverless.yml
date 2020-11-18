@@ -1,0 +1,74 @@
+service:
+  name: chosun-serverless-tutorial
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+  - serverless-offline-sqs
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+  stage: dev
+  iamRoleStatements:
+  - Effect: 'Allow'
+    Action: 'sqs:*'
+    Resource:
+      - Fn::GetAtt: [TutorialSQS, Arn]
+
+functions:
+  first:
+    handler: first.hello
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - TutorialSQS
+              - Arn
+          batchSize: 10
+          enabled: true
+  # second:
+  #   handler: second.hello
+  #   events:
+  #     - http:
+  #         method: get
+  #         path: second
+resources:
+  Resources:
+    TutorialSQS:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: MyFirstQueue.fifo
+        # FifoQueue: True
+        MessageRetentionPeriod: 604800
+        VisibilityTimeout: 60
+        ReceiveMessageWaitTimeSeconds: 20
+        RedrivePolicy:
+          deadLetterTargetArn:
+            Fn::GetAtt:
+              - TutorialSQSQDL
+              - Arn
+          maxReceiveCount: 5
+    TutorialSQSQDL:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: MyFirstQueueDl.fifo
+        # FifoQueue: True
+
+custom:
+  derived:
+    QueueMainName: MyFirstQueue.fifo
+    QueueDlName: MyFirstQueueDl.fifo
+  serverless-offline-sqs:
+    autoCreate: true # create queue if not exists
+    apiVersion: "2012-11-05"
+    endpoint: http://0.0.0.0:9324
+    region: eu-west-1
+    accessKeyId: root
+    secretAccessKey: root
+    skipCacheInvalidation: false
