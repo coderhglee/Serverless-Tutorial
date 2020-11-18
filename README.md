@@ -42,7 +42,7 @@ serverless create --template <template_name> --path <directory_path> --name <ser
 [Invoke]: https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke/
 1. 로컬에 정의된 함수 호출
 ```
-serverless invoke local --function <function_name> --path <file_name>
+serverless invoke local --function <function_name>
 ```
 
 2. AWS에 실제 반영된 람다 호출
@@ -62,25 +62,18 @@ SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_
 ## 5. [AWS Events]
 [AWS Events]: serverless.com/framework/docs/providers/aws/events/
 
-### 5.1 [API GATEWAY]
+### 1. [API GATEWAY]
 [API GATEWAY]: https://www.serverless.com/framework/docs/providers/aws/events/apigateway/
 #### - [HTTP API vs REST API]
 [HTTP API vs REST API]: https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/http-api-vs-rest.html
 #### - [Custom Domains]
 [Custom Domains]: https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-custom-domains.html
 
-### 5.2 [Schedule]
-[Schedule]: https://www.serverless.com/framework/docs/providers/aws/events/schedule/
-- 특정 이벤트마다 함수를 실행시킨다
-- e.g) cron, rate
+### 2. Schedule
 
-### 5.3 [SQS]
-[SQS]: https://www.serverless.com/framework/docs/providers/aws/events/sqs/
-- SQS 대기열에 메시지가 있을 때 마다 함수가 트리거
+### 3. SQS
 
-### 5.4 [S3]
-[S3]: https://www.serverless.com/framework/docs/providers/aws/events/s3/
-- 버킷에 객체가 추가되거나 수정 될 때 함수를 실행
+### 4. S3
 
 ## 6. [Plugins]
 [Plugins]: https://www.serverless.com/framework/docs/providers/aws/guide/plugins/
@@ -97,9 +90,13 @@ SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_
 [serverless-offline]: https://github.com/dherault/serverless-offline
 - 람다 함수 로컬 실행 플러그인
 ```
-npm install serverless-offline 
+docker-compose start
 
-sls offline
+./create-queues.sh
+
+SLS_DEBUG=* npx sls offline
+
+aws sqs --endpoint-url http://localhost:9324 send-message --queue-url http://localhost:9324/queue/MyFirstQueue.fifo --message-body "MyFourthMessage" &
 ```
 
 ### [serverless-offline-sqs]
