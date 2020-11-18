@@ -90,9 +90,13 @@ SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_
 [serverless-offline]: https://github.com/dherault/serverless-offline
 - 람다 함수 로컬 실행 플러그인
 ```
-npm install serverless-offline 
+docker-compose start
 
-sls offline
+./create-queues.sh
+
+SLS_DEBUG=* npx sls offline
+
+aws sqs --endpoint-url http://localhost:9324 send-message --queue-url http://localhost:9324/queue/MyFirstQueue.fifo --message-body "MyFourthMessage" &
 ```
 
 ### [serverless-offline-sqs]
