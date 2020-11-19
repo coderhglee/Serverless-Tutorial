@@ -69,11 +69,14 @@ SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_
 #### - [Custom Domains]
 [Custom Domains]: https://docs.aws.amazon.com/ko_kr/apigateway/latest/developerguide/how-to-custom-domains.html
 
-### 2. Schedule
+### 2. [Schedule]
+[Schedule]: https://www.serverless.com/framework/docs/providers/aws/events/schedule/
 
-### 3. SQS
+### 3. [SQS]
+[SQS]: https://www.serverless.com/framework/docs/providers/aws/events/sqs/
 
-### 4. S3
+### 4. [S3]
+[S3]: https://www.serverless.com/framework/docs/providers/aws/events/s3/
 
 ## 6. [Plugins]
 [Plugins]: https://www.serverless.com/framework/docs/providers/aws/guide/plugins/
@@ -89,6 +92,11 @@ SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_
 ### [serverless-offline]
 [serverless-offline]: https://github.com/dherault/serverless-offline
 - 람다 함수 로컬 실행 플러그인
+
+### [serverless-offline-sqs]
+[serverless-offline-sqs]: https://github.com/CoorpAcademy/serverless-plugins/tree/master/packages/serverless-offline-sqs
+- ElasticMQ를 이용한 로컬 SQS 테스트
+- Docker 활용
 ```
 docker-compose start
 
@@ -98,11 +106,6 @@ SLS_DEBUG=* npx sls offline
 
 aws sqs --endpoint-url http://localhost:9324 send-message --queue-url http://localhost:9324/queue/MyFirstQueue.fifo --message-body "MyFourthMessage" &
 ```
-
-### [serverless-offline-sqs]
-[serverless-offline-sqs]: https://github.com/CoorpAcademy/serverless-plugins/tree/master/packages/serverless-offline-sqs
-- ElasticMQ를 이용한 로컬 SQS 테스트
-- Docker 활용
 
 ### [serverless-python-requirements]
 [serverless-python-requirements]: https://github.com/UnitedIncome/serverless-python-requirements
