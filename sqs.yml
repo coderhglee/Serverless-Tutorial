@@ -1,0 +1,20 @@
+Resources:
+    TutorialSQS:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:custom.derived.QueueMainName}
+        FifoQueue: True
+        MessageRetentionPeriod: 604800
+        VisibilityTimeout: 60
+        ReceiveMessageWaitTimeSeconds: 20
+        RedrivePolicy:
+          deadLetterTargetArn:
+            Fn::GetAtt:
+              - TutorialSQSQDL
+              - Arn
+          maxReceiveCount: 5
+    TutorialSQSQDL:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:custom.derived.QueueDlName}
+        FifoQueue: True
