@@ -1,5 +1,5 @@
 service:
-  name: chosun-serverless-tutorial
+  name: chosun-sqs-tutorial
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -13,7 +13,8 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  # region: eu-west-1
+  region: ap-northeast-2
+  profile: hglee
   # stage: dev
   iamRoleStatements:
   - Effect: 'Allow'
