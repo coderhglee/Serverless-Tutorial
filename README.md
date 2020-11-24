@@ -59,9 +59,13 @@ arn:aws:lambda:{region}:{account}:function:{service_name}-{stage}-{function_name
 SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_name <<ARC ORG>> --verbose
 ```
 
-## 5. [AWS Events]
-[AWS Events]: serverless.com/framework/docs/providers/aws/events/
-
+## 5. AWS Events
+#### - [AWS Lambda Events] 
+[AWS Lambda Events]: https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/lambda-services.html
+#### - [Serverless AWS Lambda Events]
+[Serverless AWS Lambda Events]: serverless.com/framework/docs/providers/aws/events/
+#### - [AWSCloudFormation - intrinsic-function-reference]
+[AWSCloudFormation - intrinsic-function-reference]: https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html
 ### 1. [API GATEWAY]
 [API GATEWAY]: https://www.serverless.com/framework/docs/providers/aws/events/apigateway/
 #### - [HTTP API vs REST API]
@@ -74,9 +78,13 @@ SLS_DEBUG=* npx sls deploy --stage <<STAGE NAME>> --region <<AWS REGION>> --org_
 
 ### 3. [SQS]
 [SQS]: https://www.serverless.com/framework/docs/providers/aws/events/sqs/
+- [SQS Message Event]
+[SQS Message Event]: https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/with-sqs.html
 
 ### 4. [S3]
 [S3]: https://www.serverless.com/framework/docs/providers/aws/events/s3/
+#### [S3 Notification content structure]
+[S3 Notification content structure]: https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/dev/notification-content-structure.html
 
 ## 6. [Plugins]
 [Plugins]: https://www.serverless.com/framework/docs/providers/aws/guide/plugins/
